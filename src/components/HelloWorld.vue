@@ -160,6 +160,19 @@
         </div>
       </div>
     </section>
+    
+    <section class="section">
+      <b-dropdown hoverable>
+        <button class="button is-info" slot="trigger">
+          <span>Hover me!</span>
+          <b-icon class="fa fa-caret-down"></b-icon>
+        </button>
+
+        <b-dropdown-item>Action</b-dropdown-item>
+        <b-dropdown-item>Another action</b-dropdown-item>
+        <b-dropdown-item>Something else</b-dropdown-item>
+      </b-dropdown>
+    </section>
   </div>
 </template>
 

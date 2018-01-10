@@ -1,24 +1,43 @@
-var auth = false
+import Vuex from 'vuex'
+import Vue from 'vue'
 
-export function login () {
-  auth = true
-}
+Vue.use(Vuex)
+console.log('using vuex');
 
-export function logout () {
-  auth = false
-}
-
-export function isLoggedIn () {
-  return auth
-}
-
-export function requireAuth (to, from, next) {
-  if (!isLoggedIn()) {
-    next({
-      path: '/',
-      query: { redirect: to.fullPath }
-    })
-  } else {
-    next()
+export default new Vuex.Store({
+  state: {
+    auth: false
+  },
+  getters: {
+    isLoggedIn
+  },
+  mutations: {
+    login,
+    logout
   }
+})
+
+function login (state) {
+  state.auth = true
+  return true
 }
+
+function logout (state) {
+  state.auth = false
+  return true
+}
+
+function isLoggedIn (state, getters) {
+  return state.auth
+}
+
+// function requireAuth (to, from, next) {
+//   if (!isLoggedIn()) {
+//     next({
+//       path: '/',
+//       query: { redirect: to.fullPath }
+//     })
+//   } else {
+//     next()
+//   }
+// }

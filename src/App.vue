@@ -7,6 +7,7 @@
 
 <script>
   import SmaHeader from './components/SmaHeader'
+  console.log('in app comp', this.$store)
 
   export default {
     name: 'app',
@@ -47,5 +48,6 @@
 
   // Import Bulma and Buefy styles
   @import "~bulma";
+  @import "~bulma-badge";
   @import "~buefy/src/scss/buefy";
 </style>

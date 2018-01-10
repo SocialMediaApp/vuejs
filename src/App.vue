@@ -2,17 +2,20 @@
   <div id="app">
     <sma-header/>
     <router-view/>
+    <sma-footer/>
   </div>
 </template>
 
 <script>
   import SmaHeader from './components/SmaHeader'
+  import SmaFooter from './components/SmaFooter'
   console.log('in app comp', this.$store)
 
   export default {
     name: 'app',
     components: {
-      SmaHeader
+      SmaHeader,
+      SmaFooter
     }
   }
 </script>

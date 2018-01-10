@@ -2,6 +2,7 @@ const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 
 const tempUser = {
+  shortname: 'twaite',
   firstName: 'Tim',
   lastName: 'Waite',
   email: 'tim@sma.com',

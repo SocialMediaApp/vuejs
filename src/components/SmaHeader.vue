@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar has-shadow is-primary" role="navigation">
+  <nav class="navbar has-shadow is-primary is-fixed-top" role="navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
         <p class="title has-text-white">SMA</p>

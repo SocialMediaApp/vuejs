@@ -1,30 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Newsfeed from '@/components/Newsfeed'
-import store from '../store'
+import Newsfeed from '@/components/NewsFeed/Newsfeed'
+import auth from '@/mixins/auth'
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: Login
     }, {
-      path: '/:shortname/feed',
+      path: '/',
       name: 'newsfeed',
-      component: Newsfeed
+      component: Newsfeed,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'login' && !store.getters.isLoggedIn) {
-    next(false)
-  }
-  next()
+  auth.onAuthChanged(user => {
+    if (to.meta.requiresAuth && !user) {
+      console.warn(`Auth required for ${to.name}`)
+      next('/login')
+    } else {
+      next()
+    }
+  })
 })
 
 export default router

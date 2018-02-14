@@ -1,20 +1,4 @@
-const LOGIN = 'LOGIN'
-const LOGOUT = 'LOGOUT'
-
-const tempUser = {
-  shortname: 'twaite',
-  firstName: 'Tim',
-  lastName: 'Waite',
-  email: 'tim@sma.com',
-  phone: '222-222-2222',
-  notifications: '3'
-}
-
 export default {
-  state: {
-    auth: false,
-    user: {}
-  },
   getters: {
     isLoggedIn: state => {
       return state.auth
@@ -23,25 +7,23 @@ export default {
       return state.user
     }
   },
-  mutations: {
-    [LOGIN] (state) {
-      state.auth = true
-      state.user = tempUser
-    },
-    [LOGOUT] (state) {
-      state.auth = false
-      state.user = {}
-    }
+  // mutations: {
+  //   [LOGIN] (state, user, token) {
+  //     state.auth = token
+  //     state.user = user
+  //   },
+  //   [LOGOUT] (state) {
+  //     firebase.auth().signOut().then(() => {
+  //       // Sign-out successful.
+  //       state.auth = false
+  //       state.user = {}
+  //     }).catch(error => {
+  //       // An error happened.
+  //       console.error(error)
+  //     })
+  //   }
+  // }
+  actions: {
+
   }
 }
-
-// function requireAuth (to, from, next) {
-//   if (!isLoggedIn()) {
-//     next({
-//       path: '/',
-//       query: { redirect: to.fullPath }
-//     })
-//   } else {
-//     next()
-//   }
-// }

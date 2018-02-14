@@ -19,40 +19,43 @@
       </div>
     </div>
 
-    <div class="navbar-end">
-      <a v-if="isLoggedIn" class="navbar-item">
+    <div class="navbar-end" v-if="user">
+      <a class="navbar-item">
+        <img :src="user.photoURL">
+      </a>
+      <a class="navbar-item">
         <span class="badge is-badge-danger" data-badge="2">
-          {{ user.firstName }} {{ user.lastName }}
+          {{ user.displayName }}
         </span>
       </a>
-      <a v-if="isLoggedIn" @click="logout" class="navbar-item">
+      <a @click="logout" class="navbar-item">
         Logout
-      </a>
-      <a v-else @click="login" class="navbar-item">
-        Login
       </a>
     </div>
   </nav>
 </template>
 
 <script>
+import auth from '../mixins/auth'
+
 export default {
-  computed: {
-    isLoggedIn () {
-      return this.$store.getters.isLoggedIn
-    },
-    user () {
-      return this.$store.getters.getUser
+  mixin: [auth],
+  data: function () {
+    return {
+      user: auth.getUser()
     }
   },
+  created () {
+    // Handle auth change event
+    auth.onAuthChanged(user => {
+      this.user = user
+    })
+  },
   methods: {
-    login () {
-      this.$store.commit('LOGIN')
-      this.$router.push({name: 'newsfeed', params: { shortname: 'test' }})
-    },
     logout () {
-      this.$store.commit('LOGOUT')
-      this.$router.push({name: 'login'})
+      auth.logout(() => {
+        this.$router.push({name: 'login'})
+      })
     }
   }
 }

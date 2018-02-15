@@ -2,7 +2,8 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img :src="user.photoURL">
+        <v-gravatar class="avatar" :email="user.uid"/>
+        <!-- <img :src="user.photoURL"> -->
       </p>
     </figure>
     <div class="media-content">

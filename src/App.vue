@@ -75,6 +75,10 @@
   $link-invert: $primary-invert;
   $link-focus-border: $primary;
 
+  .avatar {
+    border-radius: 3px;
+  }
+
   // Import Bulma and Buefy styles
   @import "~bulma";
   @import "~bulma-badge";

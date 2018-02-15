@@ -21,7 +21,8 @@
 
     <div class="navbar-end" v-if="user">
       <a class="navbar-item">
-        <img :src="user.photoURL">
+        <!-- <img :src="user.photoURL"> -->
+        <v-gravatar class="avatar" :email="user.uid"/>
       </a>
       <a class="navbar-item">
         <span class="badge is-badge-danger" data-badge="2">

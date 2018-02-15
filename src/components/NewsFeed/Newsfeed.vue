@@ -5,7 +5,7 @@
       <article class="media" v-for="post in posts" :key="post.id">
         <figure class="media-left">
           <p class="image is-64x64">
-            <img src="https://bulma.io/images/placeholders/128x128.png">
+            <v-gravatar class="avatar" :email="post.userId"/>
           </p>
         </figure>
         <div class="media-content">

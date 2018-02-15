@@ -4,11 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import Gravatar from 'vue-gravatar'
 
 // CSS
 import 'font-awesome/css/font-awesome.css'
 import Buefy from 'buefy'
-
 
 // TODO move to it's own config file
 var firebaseConfig = {
@@ -23,6 +23,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 Vue.use(Buefy)
+Vue.component('v-gravatar', Gravatar)
 
 Vue.config.productionTip = false
 

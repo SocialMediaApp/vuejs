@@ -7,7 +7,7 @@ console.log('using vuex')
 
 export default new Vuex.Store({
   modules: {
-    auth
+    users
   },
   strict: true
 })

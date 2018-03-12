@@ -30,10 +30,10 @@
 
 <script>
 import auth from '../../mixins/auth'
-import dbService from '../../mixins/database'
+import posts from '../../mixins/posts'
 
 export default {
-  mixins: [auth, dbService],
+  mixins: [auth, posts],
   data: function () {
     return {
       user: auth.getUser(),
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     createPost () {
-      dbService.createTextPost(this.post, this.user)
+      posts.createTextPost(this.post, this.user)
         .then(document => {
           this.post = ''
           this.$emit('new-post')

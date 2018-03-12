@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Newsfeed from '@/components/NewsFeed/Newsfeed'
+import Profile from '@/components/Profile'
 import auth from '@/mixins/auth'
 
 Vue.use(Router)
@@ -16,6 +17,13 @@ const router = new Router({
       path: '/',
       name: 'newsfeed',
       component: Newsfeed,
+      meta: {
+        requiresAuth: true
+      }
+    }, {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
         requiresAuth: true
       }

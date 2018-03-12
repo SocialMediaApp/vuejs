@@ -44,7 +44,7 @@
 <script>
 // Mixins
 import auth from '../../mixins/auth'
-import dbService from '../../mixins/database'
+import posts from '../../mixins/posts'
 import moment from 'moment'
 
 // Components
@@ -61,7 +61,7 @@ export default {
     }
   },
   created () {
-    dbService.subscribeToPosts(posts => {
+    posts.subscribeToPosts(posts => {
       this.posts = posts
     })
   },
@@ -70,10 +70,10 @@ export default {
       return moment(datetime).fromNow()
     },
     like (post) {
-      dbService.likePost(post, this.user.uid)
+      posts.likePost(post, this.user.uid)
     },
     dislike (post) {
-      dbService.dislikePost(post, this.user.uid)
+      posts.dislikePost(post, this.user.uid)
     }
   }
 }

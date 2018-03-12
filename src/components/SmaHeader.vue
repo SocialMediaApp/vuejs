@@ -25,10 +25,16 @@
         <v-gravatar class="avatar" :email="user.uid"/>
       </a>
       <a class="navbar-item">
+        {{ user.displayName }}
+      </a>
+      <a class="navbar-item">
         <span class="badge is-badge-danger" data-badge="2">
-          {{ user.displayName }}
+          Notifications
         </span>
       </a>
+      <router-link class="navbar-item" to="profile">
+        Profile
+      </router-link>
       <a @click="logout" class="navbar-item">
         Logout
       </a>

@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import users from './users'
 
 export default {
   getFirebase () {
@@ -8,6 +9,7 @@ export default {
     var provider = new firebase.auth.GoogleAuthProvider()
 
     firebase.auth().signInWithPopup(provider).then(result => {
+      users.createUser(result.user)
       cb()
     }).catch(error => {
       console.error(error)

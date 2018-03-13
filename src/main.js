@@ -2,9 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 import firebase from 'firebase'
 import Gravatar from 'vue-gravatar'
+import VueAsync from 'vue-async-computed'
+import Croppa from 'vue-croppa'
+
+// Internal
+import router from './router'
 import store from './store'
 
 // CSS
@@ -24,6 +28,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 Vue.use(Buefy)
+Vue.use(VueAsync)
+Vue.use(Croppa)
 Vue.component('v-gravatar', Gravatar)
 
 Vue.config.productionTip = false

@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 let auth = {
   state: {
@@ -46,6 +47,14 @@ let auth = {
           cb(user)
         }
       })
+    },
+    updateCurrent ({commit}, user) {
+      let data = {
+        uid: user.uid,
+        name: user.name
+      }
+      firebase.firestore().collection('users').doc(data.uid).update(data)
+      commit('setCurrent', data)
     }
   }
 }

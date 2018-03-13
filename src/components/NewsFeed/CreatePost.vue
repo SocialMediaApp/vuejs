@@ -2,8 +2,7 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-64x64">
-        <v-gravatar class="avatar" :email="user.uid"/>
-        <!-- <img :src="user.photoURL"> -->
+        <sma-avatar :uid="user.uid"></sma-avatar>
       </p>
     </figure>
     <div class="media-content">
@@ -30,6 +29,7 @@
 
 <script>
 import posts from '../../mixins/posts'
+import SmaAvatar from '../SmaAvatar'
 
 export default {
   mixins: [posts],
@@ -42,6 +42,9 @@ export default {
     user () {
       return this.$store.state.auth.current
     }
+  },
+  components: {
+    SmaAvatar
   },
   methods: {
     createPost () {

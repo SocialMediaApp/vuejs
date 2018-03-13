@@ -4,21 +4,22 @@
       <b-field label="Name">
         <b-input v-model="user.name"></b-input>
       </b-field>
-      <b-field>
-        <b-upload 
-          v-model="files"
-          accept="image/*"
-          native>
-            <a class="button is-primary">
-                <b-icon class="fa fa-upload"></b-icon>
-                <span>Click to upload</span>
-            </a>
-        </b-upload>
-        <div v-if="files.length">
-            <span class="file-name">
-                {{ files[0].name }}
-            </span>
-        </div>
+      <b-field label="Avatar">
+        <figure class="image">
+          <croppa 
+            v-model="file"
+            canvas-color="whitesmoke"
+            accept="image/*"
+            :placeholder-font-size="12"
+            :show-remove-button="false"
+            :prevent-white-space="true">
+          </croppa>
+          <button 
+            @click="file.chooseFile()" 
+            class="button is-primary">
+            Upload Avatar
+          </button>
+        </figure>
       </b-field>
       <div class="level">
         <div class="level-left"></div>
@@ -26,7 +27,7 @@
           <button
             class="button is-info"
             @click="save()">
-            Save Changes  
+            Save Changes
           </button>
         </div>
       </div>
@@ -35,12 +36,14 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import users from '../mixins/users'
+import storage from '../mixins/storage'
 
 export default {
+  mixins: [users, storage],
   data: function () {
     return {
-      files: []
+      file: {}
     }
   },
   computed: {
@@ -50,17 +53,12 @@ export default {
   },
   methods: {
     save () {
-      users.update(this.user)
-      if (this.files.length) {
-        this.upload()
+      this.$store.dispatch('updateCurrent', this.user)
+      if (this.file.hasImage()) {
+        this.file.generateBlob(blob => {
+          storage.uploadAvatar(this.user.uid, blob)
+        })
       }
-    },
-    upload () { // TODO move to mixin
-      let ref = firebase.storage().ref()
-      let refChild = ref.child(this.user.uid + '-avatar.jpg')
-      refChild.put(this.files[0]).then(snapshot => {
-        console.log('uploaded', snapshot)
-      })
     }
   }
 }

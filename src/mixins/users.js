@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 import 'firebase/firestore'
-import auth from './auth'
 
 function db () {
   return firebase.firestore()

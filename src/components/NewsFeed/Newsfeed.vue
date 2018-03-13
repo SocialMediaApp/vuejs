@@ -5,7 +5,7 @@
       <article class="media" v-for="post in posts" :key="post.id">
         <figure class="media-left">
           <p class="image is-64x64">
-            <v-gravatar class="avatar" :email="post.userId"/>
+            <sma-avatar :uid="post.userId"></sma-avatar>
           </p>
         </figure>
         <div class="media-content">
@@ -43,21 +43,28 @@
 
 <script>
 // Mixins
-import auth from '../../mixins/auth'
 import posts from '../../mixins/posts'
 import moment from 'moment'
+import * as _ from 'lodash'
 
 // Components
 import CreatePost from './CreatePost'
+import SmaAvatar from '../SmaAvatar'
 
 export default {
+  mixins: [posts],
   components: {
-    CreatePost
+    CreatePost,
+    SmaAvatar
   },
   data: function () {
     return {
-      user: auth.getUser(),
       posts: []
+    }
+  },
+  computed: {
+    user () {
+      return JSON.parse(JSON.stringify(this.$store.state.auth.current))
     }
   },
   created () {

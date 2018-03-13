@@ -21,8 +21,7 @@
 
     <div class="navbar-end" v-if="user && user.uid">
       <a class="navbar-item">
-        <!-- <img :src="user.photoURL"> -->
-        <v-gravatar class="avatar" :email="user.uid"/>
+        <sma-avatar :uid="user.uid"></sma-avatar>
       </a>
       <a class="navbar-item">
         {{ user.name }}
@@ -43,7 +42,14 @@
 </template>
 
 <script>
+import storage from '../mixins/storage'
+import SmaAvatar from './SmaAvatar'
+
 export default {
+  mixins: [storage],
+  components: {
+    SmaAvatar
+  },
   computed: {
     user () {
       return this.$store.state.auth.current

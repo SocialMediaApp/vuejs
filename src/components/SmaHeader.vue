@@ -19,13 +19,13 @@
       </div>
     </div>
 
-    <div class="navbar-end" v-if="user">
+    <div class="navbar-end" v-if="user && user.uid">
       <a class="navbar-item">
         <!-- <img :src="user.photoURL"> -->
         <v-gravatar class="avatar" :email="user.uid"/>
       </a>
       <a class="navbar-item">
-        {{ user.displayName }}
+        {{ user.name }}
       </a>
       <a class="navbar-item">
         <span class="badge is-badge-danger" data-badge="2">
@@ -43,24 +43,15 @@
 </template>
 
 <script>
-import auth from '../mixins/auth'
-
 export default {
-  mixin: [auth],
-  data: function () {
-    return {
-      user: auth.getUser()
+  computed: {
+    user () {
+      return this.$store.state.auth.current
     }
-  },
-  created () {
-    // Handle auth change event
-    auth.onAuthChanged(user => {
-      this.user = user
-    })
   },
   methods: {
     logout () {
-      auth.logout(() => {
+      this.$store.dispatch('logout', () => {
         this.$router.push({name: 'login'})
       })
     }

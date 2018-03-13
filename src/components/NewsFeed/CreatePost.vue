@@ -29,15 +29,18 @@
 </template>
 
 <script>
-import auth from '../../mixins/auth'
 import posts from '../../mixins/posts'
 
 export default {
-  mixins: [auth, posts],
+  mixins: [posts],
   data: function () {
     return {
-      user: auth.getUser(),
       post: ''
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.auth.current
     }
   },
   methods: {

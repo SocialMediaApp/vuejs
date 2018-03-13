@@ -2,9 +2,6 @@ import firebase from 'firebase'
 import users from './users'
 
 export default {
-  getFirebase () {
-    return firebase.app()
-  },
   loginWithGoogle (cb) {
     var provider = new firebase.auth.GoogleAuthProvider()
 

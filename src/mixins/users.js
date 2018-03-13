@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import 'firebase/firestore'
+import auth from './auth'
 
 function db () {
   return firebase.firestore()
@@ -19,7 +20,7 @@ export default {
   create (user) {
     return db().collection('users').doc(user.uid).set(user)
   },
-  update (uid, updates) {
-    return db.collection('users').doc(uid).update(updates)
+  update (user) {
+    return db().collection('users').doc(user.uid).update(user)
   }
 }

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import firebase from 'firebase'
 import Gravatar from 'vue-gravatar'
+import store from './store'
 
 // CSS
 import 'font-awesome/css/font-awesome.css'
@@ -30,7 +31,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // store,
+  store,
   router,
   template: '<App/>',
   components: { App }

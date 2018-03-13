@@ -18,10 +18,8 @@
 </template>
 
 <script>
-import auth from '../mixins/auth'
 
 export default {
-  mixins: [auth],
   data: () => {
     return {
       email: '',
@@ -30,8 +28,8 @@ export default {
   },
   methods: {
     googleSignIn () {
-      auth.loginWithGoogle(() => {
-        this.$router.push({name: 'newsfeed'})
+      this.$store.dispatch('loginWithGoogle', () => {
+        this.$router.push({name: 'newsfeed'}) // TODO why isn't this working
       })
     }
   }

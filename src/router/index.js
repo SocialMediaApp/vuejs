@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Newsfeed from '@/components/NewsFeed/Newsfeed'
 import Profile from '@/components/Profile'
-import auth from '@/mixins/auth'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -32,7 +32,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  auth.onAuthChanged(user => {
+  store.dispatch('onAuthChanged', user => {
     if (to.meta.requiresAuth && !user) {
       console.warn(`Auth required for ${to.name}`)
       next('/login')

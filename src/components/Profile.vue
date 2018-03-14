@@ -59,6 +59,14 @@ export default {
           storage.uploadAvatar(this.user.uid, blob)
         })
       }
+      this.toastSuccess()
+    },
+    toastSuccess () {
+      this.$toast.open({
+        duration: 3000,
+        message: 'Updated profile',
+        type: 'is-success'
+      })
     }
   }
 }

@@ -45,7 +45,6 @@
 // Mixins
 import posts from '../../mixins/posts'
 import moment from 'moment'
-import * as _ from 'lodash'
 
 // Components
 import CreatePost from './CreatePost'

@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container is-fluid">
       <b-field label="Name">
-        <b-input v-model="user.name"></b-input>
+        <b-input v-model="name"></b-input>
       </b-field>
       <b-field label="Avatar">
         <figure class="image">
@@ -38,12 +38,14 @@
 <script>
 import users from '../mixins/users'
 import storage from '../mixins/storage'
+import { clone, cloneDeep } from 'lodash'
 
 export default {
   mixins: [users, storage],
   data: function () {
     return {
-      file: {}
+      file: {},
+      name: clone(this.$store.state.auth.current.name)
     }
   },
   computed: {
@@ -53,7 +55,9 @@ export default {
   },
   methods: {
     save () {
-      this.$store.dispatch('updateCurrent', this.user)
+      let user = cloneDeep(this.user)
+      user.name = this.name
+      this.$store.dispatch('updateCurrent', user)
       if (this.file.hasImage()) {
         this.file.generateBlob(blob => {
           storage.uploadAvatar(this.user.uid, blob)

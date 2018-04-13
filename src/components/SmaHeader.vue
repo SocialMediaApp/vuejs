@@ -20,8 +20,8 @@
           {{ user.name }}
         </router-link>
         <a class="navbar-item">
-          <span class="badge is-badge-danger" data-badge="2">
-            Notifications
+          <span class="badge is-badge-danger" data-badge="2" @click="openMessages()">
+            Messages
           </span>
         </a>
         <router-link class="navbar-item" to="profile">
@@ -59,10 +59,13 @@ export default {
       this.$store.dispatch('logout', () => {
         this.$router.push({name: 'login'})
       })
+    },
+    openMessages () {
+      console.log('open')
     }
   }
 }
-</script>
+</script>S
 
 <style lang="scss" scoped>
   .is-active {

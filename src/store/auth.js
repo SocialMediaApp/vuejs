@@ -7,6 +7,7 @@ let auth = {
   },
   mutations: {
     setCurrent (state, user) {
+      console.log('setting current')
       state.current = user
     }
   },
@@ -21,6 +22,14 @@ let auth = {
           uid: result.user.uid,
           name: result.user.displayName
         })
+        firebase.firestore().collection('users').doc(result.user.uid).get().then(doc => {
+          if (!doc.exists) {
+            this.create({
+              uid: user.uid,
+              name: user.displayName
+            })
+          }
+        });
         cb()
       }).catch(error => {
         console.error(error)
@@ -37,12 +46,10 @@ let auth = {
     onAuthChanged ({commit, state}, cb) {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          let data = {
-            uid: user.uid,
-            name: user.displayName
-          }
-          commit('setCurrent', data)
-          cb(state.current)
+          firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
+            commit('setCurrent', doc.data())
+            cb(state.current)
+          });
         } else {
           cb(user)
         }

@@ -37,11 +37,11 @@ export default {
     post.likes--
     db().collection('posts').doc(post.id).set(post)
   },
-  createTextPost (text, user) {
+  createTextPost (text, user) {    
     return db().collection('posts').add({
       text: text,
       userId: user.uid,
-      username: user.displayName,
+      username: user.name,
       createdAt: new Date(),
       likes: 0,
       likedBy: [],
